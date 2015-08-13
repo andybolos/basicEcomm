@@ -1,0 +1,37 @@
+<div class="">
+    <h1>Admin</h1>
+    <a href="#/">Items</a>
+    <h3>Post New Item</h3>
+
+    <form class="" ng-submit="postData(newPost)">
+        <input type="text" name="title" placeholder="Item Name..." required="true" ng-model="newPost.title">
+
+        <input type="text" name="description" placeholder="Description..." ng-model="newPost.description">
+
+        <input type="text" name="price" placeholder="Price..." ng-model="newPost.price">
+
+        <input type="button" name="postData" value="Post" ng-click="postData(newPost)">
+    </form>
+
+
+
+    <h3>Update or Delete Items</h3>
+
+    <input type="text" placeholder="Filter..." ng-model="filterStuff">
+    <div ng-repeat="item in items | filter: filterStuff">
+        <ul ng-show="!editPost">
+            <li>Item: {{ item.title | uppercase}}</li>
+            <li>Description: {{ item.description | uppercase }}</li>
+            <li>Price: ${{ item.price }}</li>
+        </ul>
+        <ul ng-show="editPost">
+            <li>Item: <input type="text" value="{{ item.title }}" ng-model="item.title"></li>
+            <li>Description:  <input type="text" value="{{ item.description }}" ng-model="item.description"></li>
+            <li>Price:  <input type="text" value="{{ item.price }}" ng-model="item.price"></li>
+        </ul>
+        <button ng-click="deletePost(item._id)">Destroy</button>
+        <button ng-click="editPost = !editPost">Update</button>
+        <button ng-hide="!editPost" ng-click="updatePost(item)">Post Update</button>
+    </div>
+
+</div>
